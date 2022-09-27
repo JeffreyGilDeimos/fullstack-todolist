@@ -9,6 +9,7 @@ import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -24,7 +25,8 @@ public class TodoService {
     private final TodoRepository todoRepository;
     private final ModelMapper modelMapper;
 
-    public List<TodoDTO> addTodo(@NonNull String newTodo) {
+
+      public List<TodoDTO> addTodo(@NonNull String newTodo) {
 
         // Initialize new todo
         TodoListEntity todo = TodoListEntity.builder()
@@ -73,8 +75,8 @@ public class TodoService {
         todoRepository.deleteByTodoId(id);
         return getAllTodos();
     }
-    private List<TodoDTO> getAllTodos() {
-        List<TodoListEntity> allTodo = todoRepository.findAll();
+    public List<TodoDTO> getAllTodos() {
+        List<TodoListEntity> allTodo = todoRepository.findAll(Sort.by(Sort.Direction.ASC, "createdDate"));
         List<TodoDTO> updatedList = new ArrayList<>();
 
         allTodo.forEach(data -> {
