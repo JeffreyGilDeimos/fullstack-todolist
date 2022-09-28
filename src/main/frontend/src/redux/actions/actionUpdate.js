@@ -7,11 +7,3 @@ export const setUpdateTodo = (todo) => {
     }
 }
 
-export const saveUpdateTodo = (updatedTodo) => {
-    return (dispatch) => {
-        dispatch({
-            type: "SAVE_UPDATE_TODO",
-            payload: updatedTodo
-        })
-    }
-}
